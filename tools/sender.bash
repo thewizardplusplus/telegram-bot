@@ -39,7 +39,12 @@ if [[ "$text" == "" ]]; then
 	error "text can't be empty"
 fi
 
-curl --silent --fail --data "text=$text" "$host:$port/api/v1/message"
+curl \
+	--silent \
+	--fail \
+	--header "Content-Type: application/x-www-form-urlencoded" \
+	--data-urlencode "text=$text" \
+	"$host:$port/api/v1/message"
 if [[ $? != 0 ]]; then
 	error "request failed"
 fi
