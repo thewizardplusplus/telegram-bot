@@ -29,3 +29,24 @@ paths:
           description: Bad Request
         500:
           description: Internal Server Error
+  /photo:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  pattern: \S+
+              required:
+                - file
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+        500:
+          description: Internal Server Error
