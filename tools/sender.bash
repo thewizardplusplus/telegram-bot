@@ -39,16 +39,15 @@ done
 if (( port < 1 || port > 65535 )); then
 	error "port is incorrect"
 fi
-if [[ "$text" == "" ]]; then
-	error "text can't be empty"
-fi
 
-curl \
-	--silent \
-	--fail \
-	--header "Content-Type: application/x-www-form-urlencoded" \
-	--data-urlencode "text=$text" \
-	"$host:$port/api/v1/message"
+if [[ "$text" != "" ]]; then
+	curl \
+		--silent \
+		--fail \
+		--header "Content-Type: application/x-www-form-urlencoded" \
+		--data-urlencode "text=$text" \
+		"$host:$port/api/v1/message"
+fi
 if [[ $? != 0 ]]; then
 	error "request failed"
 fi
