@@ -14,7 +14,7 @@ def main():
         env.load_env()
 
         bot_client = bot.init_bot()
-        server.init_server()
+        server.init_server(bot_client)
     except Exception as exception:
         logger.get_logger().error(exception)
         sys.exit(1)
