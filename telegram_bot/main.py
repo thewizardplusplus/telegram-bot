@@ -4,6 +4,7 @@ from . import logger
 from . import cli
 from . import env
 from . import bot
+from . import server
 
 def main():
     logger.init_logger()
@@ -13,7 +14,7 @@ def main():
         env.load_env()
 
         bot_client = bot.init_bot()
-        bot.send_message(bot_client, 'Тест.')
+        server.init_server()
     except Exception as exception:
         logger.get_logger().error(exception)
         sys.exit(1)
