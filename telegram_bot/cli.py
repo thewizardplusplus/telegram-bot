@@ -18,7 +18,7 @@ def parse_options():
         '--version',
         action='version',
         help='show the version message and exit',
-        version='{}, v{}\n'.format(consts.APP_NAME, consts.APP_VERSION) \
+        version='Telegram Bot, v{}\n'.format(consts.APP_VERSION) \
             + 'Copyright (C) 2017 thewizardplusplus',
     )
 
