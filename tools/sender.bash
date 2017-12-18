@@ -7,6 +7,23 @@ function error() {
 	exit 1
 }
 
+function send() {
+	declare -r host="$1"
+	declare -r port="$2"
+	declare -r endpoint="$3"
+	declare -r data="$4"
+
+	curl \
+		--silent \
+		--fail \
+		--header "Content-Type: application/x-www-form-urlencoded" \
+		--data-urlencode "$data" \
+		"$host:$port/api/v1/$endpoint"
+	if [[ $? != 0 ]]; then
+		error "request failed"
+	fi
+}
+
 declare host="localhost"
 declare -i port=4000
 declare text=""
@@ -41,21 +58,8 @@ if (( port < 1 || port > 65535 )); then
 fi
 
 if [[ "$text" != "" ]]; then
-	curl \
-		--silent \
-		--fail \
-		--header "Content-Type: application/x-www-form-urlencoded" \
-		--data-urlencode "text=$text" \
-		"$host:$port/api/v1/message"
+	send "$host" "$port" message "text=$text"
 fi
 if [[ "$file" != "" ]]; then
-	curl \
-		--silent \
-		--fail \
-		--header "Content-Type: application/x-www-form-urlencoded" \
-		--data-urlencode "file=$(realpath "$file")" \
-		"$host:$port/api/v1/photo"
-fi
-if [[ $? != 0 ]]; then
-	error "request failed"
+	send "$host" "$port" photo "file=$(realpath "$file")"
 fi
