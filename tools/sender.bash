@@ -9,8 +9,21 @@ function error() {
 
 declare -i port=4000
 declare text=""
-while getopts "p:t:" option; do
+while getopts "hp:t:" option; do
 	case "$option" in
+		h)
+			declare -r script_name="$(basename "$0")"
+			echo "Usage:"
+			echo "  $script_name -h"
+			echo "  $script_name [-p PORT] -t TEXT"
+			echo
+			echo "Options:"
+			echo "  -h       - show this help message;"
+			echo "  -p PORT  - set a port number (default: 4000);"
+			echo "  -t TEXT  - set a message text."
+
+			exit 0
+			;;
 		p) port="$OPTARG";;
 		t) text="$OPTARG";;
 		?) exit 1;;
