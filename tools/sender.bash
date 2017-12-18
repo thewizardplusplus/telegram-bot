@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -o errexit
-
 function error() {
 	declare -r message="$1"
 
@@ -25,5 +23,7 @@ if [[ "$text" == "" ]]; then
 	error "text can't be empty"
 fi
 
-echo "port: $port"
-echo "text: $text"
+curl --silent --fail --data "text=$text" "http://localhost:$port/api/v1/message"
+if [[ $? != 0 ]]; then
+	error "request failed"
+fi
