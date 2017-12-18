@@ -25,6 +25,10 @@ $ python3 -m pip install .
 
 But then the utility should be started as `python3 -m telegram_bot`.
 
+## API Description
+
+API description in the [Swagger](http://swagger.io/) format: [docs/swagger.yaml](docs/swagger.yaml).
+
 ## License
 
 GPL-3.0-or-later

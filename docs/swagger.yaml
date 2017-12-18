@@ -1,0 +1,31 @@
+openapi: "3.0.0"
+info:
+  title: telegram-bot
+  version: 1.0.0
+servers:
+  - url: http://localhost:{port}/api/v1
+    variables:
+      port:
+        default: "4000"
+paths:
+  /message:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  pattern: \S+
+              required:
+                - text
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+        500:
+          description: Internal Server Error
