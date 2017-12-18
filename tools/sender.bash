@@ -7,24 +7,27 @@ function error() {
 	exit 1
 }
 
+declare host="localhost"
 declare -i port=4000
 declare text=""
-while getopts "hp:t:" option; do
+while getopts "hH:P:t:" option; do
 	case "$option" in
 		h)
 			declare -r script_name="$(basename "$0")"
 			echo "Usage:"
 			echo "  $script_name -h"
-			echo "  $script_name [-p PORT] -t TEXT"
+			echo "  $script_name [-H HOST] [-P PORT] -t TEXT"
 			echo
 			echo "Options:"
 			echo "  -h       - show this help message;"
-			echo "  -p PORT  - set a port number (default: 4000);"
+			echo "  -H HOST  - set a host name (default: localhost);"
+			echo "  -P PORT  - set a port number (default: 4000);"
 			echo "  -t TEXT  - set a message text."
 
 			exit 0
 			;;
-		p) port="$OPTARG";;
+		H) host="$OPTARG";;
+		P) port="$OPTARG";;
 		t) text="$OPTARG";;
 		?) exit 1;;
 	esac
@@ -36,7 +39,7 @@ if [[ "$text" == "" ]]; then
 	error "text can't be empty"
 fi
 
-curl --silent --fail --data "text=$text" "http://localhost:$port/api/v1/message"
+curl --silent --fail --data "text=$text" "$host:$port/api/v1/message"
 if [[ $? != 0 ]]; then
 	error "request failed"
 fi
