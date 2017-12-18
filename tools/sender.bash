@@ -53,7 +53,7 @@ if [[ "$file" != "" ]]; then
 		--silent \
 		--fail \
 		--header "Content-Type: application/x-www-form-urlencoded" \
-		--data-urlencode "file=$file" \
+		--data-urlencode "file=$(realpath "$file")" \
 		"$host:$port/api/v1/photo"
 fi
 if [[ $? != 0 ]]; then
