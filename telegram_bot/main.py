@@ -13,6 +13,7 @@ def main():
         env.load_env()
 
         bot_client = bot.init_bot()
+        bot.send_message(bot_client, 'Тест.')
     except Exception as exception:
         logger.get_logger().error(exception)
         sys.exit(1)

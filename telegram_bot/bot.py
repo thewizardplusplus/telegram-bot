@@ -24,3 +24,7 @@ def init_bot():
     )
 
     return bot
+
+def send_message(bot, text):
+    channel = env.get_env('CHANNEL')
+    bot.send_message(channel, text)
