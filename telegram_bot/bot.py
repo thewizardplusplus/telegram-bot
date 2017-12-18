@@ -28,3 +28,8 @@ def init_bot():
 def send_message(bot, text):
     channel = env.get_env('CHANNEL')
     bot.send_message(channel, text)
+
+def send_photo(bot, filename):
+    channel = env.get_env('CHANNEL')
+    with open(filename, 'rb') as photo:
+        bot.send_photo(channel, photo)
