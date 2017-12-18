@@ -48,6 +48,14 @@ if [[ "$text" != "" ]]; then
 		--data-urlencode "text=$text" \
 		"$host:$port/api/v1/message"
 fi
+if [[ "$file" != "" ]]; then
+	curl \
+		--silent \
+		--fail \
+		--header "Content-Type: application/x-www-form-urlencoded" \
+		--data-urlencode "file=$file" \
+		"$host:$port/api/v1/photo"
+fi
 if [[ $? != 0 ]]; then
 	error "request failed"
 fi
