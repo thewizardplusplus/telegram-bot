@@ -6,10 +6,12 @@
 
 - publication into a specified channel:
   - sending of text messages;
+  - sending of photo messages;
 - working mode:
   - run as a web service;
   - control via the RESTful API;
-- utility for a sending of requests to the API.
+- utility for a sending of requests to the API:
+  - making of a path to a photo absolute.
 
 ## Installation
 
@@ -70,6 +72,7 @@ A `.env` config will never modify any environment variables that have already be
 ```
 $ ./tools/sender.bash -h
 $ ./tools/sender.bash [-H HOST] [-P PORT] -t TEXT
+$ ./tools/sender.bash [-H HOST] [-P PORT] -f PATH
 ```
 
 Options:
@@ -77,7 +80,8 @@ Options:
 - `-h` &mdash; show this help message;
 - `-H HOST` &mdash; set a host name (default: `localhost`);
 - `-P PORT` &mdash; set a port number (default: `4000`);
-- `-t TEXT` &mdash; set a message text.
+- `-t TEXT` &mdash; set a message text;
+- `-f PATH` &mdash; set a path to a message photo.
 
 ## API Description
 
