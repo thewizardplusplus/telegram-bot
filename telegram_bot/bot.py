@@ -1,4 +1,5 @@
 import logging
+import threading
 
 import telebot
 import termcolor
@@ -11,6 +12,15 @@ def init_bot():
 
     token = env.get_env('TOKEN')
     bot = telebot.TeleBot(token)
+    @bot.callback_query_handler(func=lambda call: call.data in [
+        'accept',
+        'reject',
+    ])
+    def buttons_callback(call):
+        logger.get_logger().debug(call)
+
+    thread = threading.Thread(target=lambda: bot.polling(none_stop=True))
+    thread.start()
 
     logger.get_logger().info(
         'initialize the %s bot',
@@ -23,7 +33,7 @@ def init_bot():
         termcolor.colored(bot_user, 'cyan'),
     )
 
-    return bot
+    return bot, thread
 
 def send_message(bot, text):
     channel = env.get_env('CHANNEL')

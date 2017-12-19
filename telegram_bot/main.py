@@ -13,7 +13,7 @@ def main():
         options = cli.parse_options()
         env.load_env()
 
-        bot_client = bot.init_bot()
+        bot_client, _ = bot.init_bot()
         server.init_server(bot_client)
     except Exception as exception:
         logger.get_logger().error(exception)
