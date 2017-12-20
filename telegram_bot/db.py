@@ -34,3 +34,11 @@ def add_vote(db_connection, chat_id, message_id, user_id, action):
             VALUES (?, ?, ?, ?)''',
             (chat_id, message_id, user_id, action),
         )
+
+def count_votes(db_connection, chat_id, message_id, action):
+    (counter,) = db_connection.execute('''
+        SELECT COUNT(*)
+        FROM votes
+        WHERE chat_id = ? AND message_id = ? AND action = ?
+    ''', (chat_id, message_id, action)).fetchone()
+    return counter
