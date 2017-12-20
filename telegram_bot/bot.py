@@ -56,3 +56,6 @@ def _make_reply_markup():
     )
 
     return markup
+
+def _format_button_text(text, data):
+    return '{} ({})'.format(text, data) if data is not None else text
