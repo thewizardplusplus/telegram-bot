@@ -42,7 +42,7 @@ def init_server(bot_client):
     server.listen(port)
 
     logger.get_logger().info(
-        'initialize the server on the %s port',
+        'run the server on the %s port',
         termcolor.colored(str(port), 'yellow'),
     )
 
