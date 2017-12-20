@@ -46,9 +46,15 @@ def send_photo(bot, filename):
     with open(filename, 'rb') as photo:
         bot.send_photo(channel, photo, reply_markup=reply_markup)
 
-def _make_reply_markup():
-    accept_text = env.get_env('ACCEPT_TEXT', 'Accept')
-    reject_text = env.get_env('REJECT_TEXT', 'Reject')
+def _make_reply_markup(**kwargs):
+    accept_text = _format_button_text(
+        env.get_env('ACCEPT_TEXT', 'Accept'),
+        kwargs.get('accept', None),
+    )
+    reject_text = _format_button_text(
+        env.get_env('REJECT_TEXT', 'Reject'),
+        kwargs.get('reject', None),
+    )
     markup = telebot.types.InlineKeyboardMarkup()
     markup.row(
         telebot.types.InlineKeyboardButton(accept_text, callback_data='accept'),
