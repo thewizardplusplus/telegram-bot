@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.2](https://github.com/thewizardplusplus/telegram-bot/tree/v1.2) (2017-12-20)
+
+- support a voting for messages:
+  - support inline keyboards in messages;
+  - support an update of inline keyboards;
+  - save a vote to a database.
+
 ## [v1.1](https://github.com/thewizardplusplus/telegram-bot/tree/v1.1) (2017-12-18)
 
 - support a sending of photo messages:
