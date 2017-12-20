@@ -10,7 +10,7 @@ def init_bot():
     telebot.logger.setLevel(logging.DEBUG)
 
     token = env.get_env('TOKEN')
-    bot = telebot.TeleBot(token)
+    bot = telebot.TeleBot(token, threaded=False)
     logger.get_logger().info(
         'initialize the %s bot',
         termcolor.colored('Telegram', 'magenta'),
