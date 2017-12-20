@@ -4,6 +4,7 @@ from . import logger
 from . import cli
 from . import env
 from . import bot
+from . import bot_thread
 from . import server
 from . import db
 
@@ -15,7 +16,8 @@ def main():
         env.load_env()
 
         db_connection = db.init_db()
-        bot_client, _ = bot.init_bot()
+        bot_client = bot.init_bot()
+        bot_thread.init_bot_thread(bot_client)
         server.init_server(bot_client)
     except Exception as exception:
         logger.get_logger().error(exception)

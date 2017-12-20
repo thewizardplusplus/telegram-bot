@@ -1,6 +1,4 @@
 import logging
-import threading
-import random
 
 import telebot
 import termcolor
@@ -13,23 +11,6 @@ def init_bot():
 
     token = env.get_env('TOKEN')
     bot = telebot.TeleBot(token)
-    @bot.callback_query_handler(func=lambda call: call.data in [
-        'accept',
-        'reject',
-    ])
-    def buttons_callback(call):
-        data = random.randint(0, 100)
-        _update_buttons(
-            bot,
-            call.message.chat.id,
-            call.message.message_id,
-            **{call.data: data},
-        )
-
-    thread = threading.Thread(target=lambda: bot.polling(none_stop=True))
-    thread.setDaemon(True)
-    thread.start()
-
     logger.get_logger().info(
         'initialize the %s bot',
         termcolor.colored('Telegram', 'magenta'),
@@ -41,7 +22,7 @@ def init_bot():
         termcolor.colored(bot_user, 'cyan'),
     )
 
-    return bot, thread
+    return bot
 
 def send_message(bot, text):
     channel = env.get_env('CHANNEL')
@@ -54,7 +35,7 @@ def send_photo(bot, filename):
     with open(filename, 'rb') as photo:
         bot.send_photo(channel, photo, reply_markup=reply_markup)
 
-def _update_buttons(bot, channel_id, message_id, **kwargs):
+def update_buttons(bot, channel_id, message_id, **kwargs):
     reply_markup = _make_reply_markup(**kwargs)
     bot.edit_message_reply_markup(
         channel_id,
