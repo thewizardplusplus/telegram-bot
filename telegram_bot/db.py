@@ -30,7 +30,7 @@ def init_db():
 def add_vote(db_connection, chat_id, message_id, user_id, action):
     with db_connection:
         db_connection.execute(
-            '''REPLACE INTO votes(chat_id, message_id, user_id, action)
+            '''INSERT INTO votes(chat_id, message_id, user_id, action)
             VALUES (?, ?, ?, ?)''',
             (chat_id, message_id, user_id, action),
         )
