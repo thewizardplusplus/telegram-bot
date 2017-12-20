@@ -46,6 +46,14 @@ def send_photo(bot, filename):
     with open(filename, 'rb') as photo:
         bot.send_photo(channel, photo, reply_markup=reply_markup)
 
+def _update_buttons(bot, channel_id, message_id, **kwargs):
+    reply_markup = _make_reply_markup(**kwargs)
+    bot.edit_message_reply_markup(
+        channel_id,
+        message_id,
+        reply_markup=reply_markup,
+    )
+
 def _make_reply_markup(**kwargs):
     accept_text = _format_button_text(
         env.get_env('ACCEPT_TEXT', 'Accept'),
