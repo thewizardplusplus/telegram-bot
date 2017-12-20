@@ -83,9 +83,12 @@ Options:
 - `-t TEXT` &mdash; set a message text;
 - `-f PATH` &mdash; set a path to a message photo.
 
-## API Description
+## Documentation
 
-API description in the [Swagger](http://swagger.io/) format: [docs/swagger.yaml](docs/swagger.yaml).
+- API description in the [Swagger](http://swagger.io/) format: [docs/swagger.yaml](docs/swagger.yaml);
+- UML component diagram:
+  - in the [PlantUML](https://plantuml.com/) language: [docs/architecture.plantuml](docs/architecture.plantuml);
+  - render: [docs/architecture.svg](docs/architecture.svg).
 
 ## License
 
