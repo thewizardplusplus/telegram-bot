@@ -5,6 +5,7 @@ import termcolor
 
 from . import env
 from . import logger
+from . import db
 
 def init_bot():
     telebot.logger.setLevel(logging.DEBUG)
@@ -35,30 +36,49 @@ def send_photo(bot, filename):
     with open(filename, 'rb') as photo:
         bot.send_photo(channel, photo, reply_markup=reply_markup)
 
-def update_buttons(bot, channel_id, message_id, **kwargs):
-    reply_markup = _make_reply_markup(**kwargs)
+def update_buttons(bot, db_connection, channel_id, message_id):
+    reply_markup = _make_reply_markup(db_connection, channel_id, message_id)
     bot.edit_message_reply_markup(
         channel_id,
         message_id,
         reply_markup=reply_markup,
     )
 
-def _make_reply_markup(**kwargs):
-    accept_text = _format_button_text(
-        env.get_env('ACCEPT_TEXT', 'Accept'),
-        kwargs.get('accept', None),
+def _make_reply_markup(db_connection=None, channel_id=None, message_id=None):
+    accept_button = _make_button_markup(
+        'accept',
+        db_connection,
+        channel_id,
+        message_id,
     )
-    reject_text = _format_button_text(
-        env.get_env('REJECT_TEXT', 'Reject'),
-        kwargs.get('reject', None),
+    reject_button = _make_button_markup(
+        'reject',
+        db_connection,
+        channel_id,
+        message_id,
     )
     markup = telebot.types.InlineKeyboardMarkup()
-    markup.row(
-        telebot.types.InlineKeyboardButton(accept_text, callback_data='accept'),
-        telebot.types.InlineKeyboardButton(reject_text, callback_data='reject'),
-    )
+    markup.row(accept_button, reject_button)
 
     return markup
+
+def _make_button_markup(
+    action,
+    db_connection=None,
+    channel_id=None,
+    message_id=None,
+):
+    counter = db.count_votes(
+        db_connection,
+        channel_id,
+        message_id,
+        action,
+    ) if all((db_connection, channel_id, message_id)) else 0
+    text = _format_button_text(
+        env.get_env(action.upper() + '_TEXT', action.capitalize()),
+        counter,
+    )
+    return telebot.types.InlineKeyboardButton(text, callback_data=action)
 
 def _format_button_text(text, data):
     return '{} ({})'.format(text, data) if data is not None else text

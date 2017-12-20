@@ -1,5 +1,4 @@
 import threading
-import random
 
 import termcolor
 
@@ -33,12 +32,11 @@ class BotThread(threading.Thread):
                 call.data,
             )
 
-            data = random.randint(0, 100)
             bot.update_buttons(
                 self.bot_client,
+                db_connection,
                 call.message.chat.id,
                 call.message.message_id,
-                **{call.data: data},
             )
 
         self.bot_client.polling(none_stop=True)
