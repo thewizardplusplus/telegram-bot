@@ -1,5 +1,6 @@
 import logging
 import threading
+import random
 
 import telebot
 import termcolor
@@ -17,7 +18,13 @@ def init_bot():
         'reject',
     ])
     def buttons_callback(call):
-        logger.get_logger().debug(call)
+        data = random.randint(0, 100)
+        _update_buttons(
+            bot,
+            call.message.chat.id,
+            call.message.message_id,
+            **{call.data: data},
+        )
 
     thread = threading.Thread(target=lambda: bot.polling(none_stop=True))
     thread.start()
