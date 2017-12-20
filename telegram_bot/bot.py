@@ -27,6 +27,7 @@ def init_bot():
         )
 
     thread = threading.Thread(target=lambda: bot.polling(none_stop=True))
+    thread.setDaemon(True)
     thread.start()
 
     logger.get_logger().info(
