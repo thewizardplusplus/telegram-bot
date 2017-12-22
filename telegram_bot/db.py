@@ -28,10 +28,12 @@ def init_db():
     return db_connection
 
 def add_vote(db_connection, chat_id, message_id, user_id, action):
+    changeable_vote = env.get_env('CHANGEABLE_VOTE', 'TRUE') == 'TRUE'
+    command = 'REPLACE' if changeable_vote else 'INSERT'
     with db_connection:
         db_connection.execute(
-            '''INSERT INTO votes(chat_id, message_id, user_id, action)
-            VALUES (?, ?, ?, ?)''',
+            command + ''' INTO votes(chat_id, message_id, user_id, action)
+                VALUES (?, ?, ?, ?)''',
             (chat_id, message_id, user_id, action),
         )
 
