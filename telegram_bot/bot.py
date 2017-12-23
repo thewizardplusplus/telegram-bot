@@ -41,11 +41,13 @@ def send_photo(bot, filename):
         )
 
 def update_buttons(bot, db_connection, channel_id, message_id):
-    reply_markup = _make_reply_markup(db_connection, channel_id, message_id)
     bot.edit_message_reply_markup(
         channel_id,
         message_id,
-        reply_markup=reply_markup,
+        reply_markup=_make_buttons_markup(
+            db.count_votes(db_connection, channel_id, message_id, 'accept'),
+            db.count_votes(db_connection, channel_id, message_id, 'reject'),
+        ),
     )
 
 def _make_reply_markup(db_connection=None, channel_id=None, message_id=None):
