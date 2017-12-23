@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.3](https://github.com/thewizardplusplus/telegram-bot/tree/v1.3) (2017-12-23)
+
+- support placeholders in a buttons text:
+  - for a number of votes;
+  - for a percent of votes;
+- support a reverse of a buttons order;
+- support emojis in a buttons text.
+
 ## [v1.2](https://github.com/thewizardplusplus/telegram-bot/tree/v1.2) (2017-12-20)
 
 - support a voting for messages:
