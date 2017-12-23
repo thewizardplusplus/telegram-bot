@@ -50,21 +50,6 @@ def update_buttons(bot, db_connection, channel_id, message_id):
         ),
     )
 
-def _make_button_markup(
-    action,
-    db_connection=None,
-    channel_id=None,
-    message_id=None,
-):
-    counter = db.count_votes(
-        db_connection,
-        channel_id,
-        message_id,
-        action,
-    ) if all((db_connection, channel_id, message_id)) else 0
-    text = _format_button_text(action, counter, counter)
-    return telebot.types.InlineKeyboardButton(text, callback_data=action)
-
 def _make_buttons_markup(accept_number=0, reject_number=0):
     total_number = accept_number + reject_number
     buttons_markup = telebot.types.InlineKeyboardMarkup()
