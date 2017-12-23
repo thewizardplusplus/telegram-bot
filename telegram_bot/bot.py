@@ -26,15 +26,19 @@ def init_bot():
     return bot
 
 def send_message(bot, text):
-    channel = env.get_env('CHANNEL')
-    reply_markup = _make_reply_markup()
-    bot.send_message(channel, text, reply_markup=reply_markup)
+    bot.send_message(
+        env.get_env('CHANNEL'),
+        text,
+        reply_markup=_make_buttons_markup(),
+    )
 
 def send_photo(bot, filename):
-    channel = env.get_env('CHANNEL')
-    reply_markup = _make_reply_markup()
     with open(filename, 'rb') as photo:
-        bot.send_photo(channel, photo, reply_markup=reply_markup)
+        bot.send_photo(
+            env.get_env('CHANNEL'),
+            photo,
+            reply_markup=_make_buttons_markup(),
+        )
 
 def update_buttons(bot, db_connection, channel_id, message_id):
     reply_markup = _make_reply_markup(db_connection, channel_id, message_id)
@@ -76,6 +80,22 @@ def _make_button_markup(
     ) if all((db_connection, channel_id, message_id)) else 0
     text = _format_button_text(action, counter, counter)
     return telebot.types.InlineKeyboardButton(text, callback_data=action)
+
+def _make_buttons_markup(accept_number=0, reject_number=0):
+    total_number = accept_number + reject_number
+    buttons_markup = telebot.types.InlineKeyboardMarkup()
+    buttons_markup.row(
+        telebot.types.InlineKeyboardButton(
+            _format_button_text('accept', accept_number, total_number),
+            callback_data='accept',
+        ),
+        telebot.types.InlineKeyboardButton(
+            _format_button_text('reject', reject_number, total_number),
+            callback_data='reject',
+        ),
+    )
+
+    return buttons_markup
 
 def _format_button_text(action, number, total_number):
     template = env.get_env(
