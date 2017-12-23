@@ -50,24 +50,6 @@ def update_buttons(bot, db_connection, channel_id, message_id):
         ),
     )
 
-def _make_reply_markup(db_connection=None, channel_id=None, message_id=None):
-    accept_button = _make_button_markup(
-        'accept',
-        db_connection,
-        channel_id,
-        message_id,
-    )
-    reject_button = _make_button_markup(
-        'reject',
-        db_connection,
-        channel_id,
-        message_id,
-    )
-    markup = telebot.types.InlineKeyboardMarkup()
-    markup.row(accept_button, reject_button)
-
-    return markup
-
 def _make_button_markup(
     action,
     db_connection=None,
