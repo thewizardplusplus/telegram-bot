@@ -13,8 +13,12 @@
     - possibility change an own vote (optionally, i.e. may be disabled);
   - decor:
     - voting by an inline keyboard;
-    - customizable a buttons text;
-    - displaying of a voting result on buttons;
+    - reverse of a buttons order (optionally);
+    - customizable a buttons text via individual templates;
+    - displaying of a voting result on buttons instead placeholders:
+      - number of votes;
+      - percent of votes;
+    - support emojis (with aliases) in a buttons text;
 - working mode:
   - run as a web service;
   - control via the RESTful API;
@@ -62,10 +66,11 @@ Environment variables:
 - `TELEGRAM_BOT_TOKEN` &mdash; [Telegram](https://telegram.org/) API access token;
 - `TELEGRAM_BOT_CHANNEL` &mdash; [Telegram](https://telegram.org/) channel name;
 - `TELEGRAM_BOT_PORT` &mdash; bot API port (default: `4000`);
-- `TELEGRAM_BOT_ACCEPT_TEXT` &mdash; text of the accept button (default: `Accept`);
-- `TELEGRAM_BOT_REJECT_TEXT` &mdash; text of the reject button (default: `Reject`);
+- `TELEGRAM_BOT_ACCEPT_TEXT` &mdash; text of the accept button (default: `:thumbsup: #{number} (#{percents}%)`);
+- `TELEGRAM_BOT_REJECT_TEXT` &mdash; text of the reject button (default: `:thumbsdown: #{number} (#{percents}%)`);
 - `TELEGRAM_BOT_DATABASE` &mdash; path to the [SQLite](https://www.sqlite.org/) database file (default: `./votes.db`);
-- `TELEGRAM_BOT_CHANGEABLE_VOTE` &mdash; flag denoting changeability of a vote (allowed: `FALSE` and `TRUE`; default: `TRUE`).
+- `TELEGRAM_BOT_CHANGEABLE_VOTE` &mdash; flag denoting changeability of a vote (allowed: `FALSE` and `TRUE`; default: `TRUE`);
+- `TELEGRAM_BOT_SWAP_BUTTONS` &mdash; flag denoting inversion of the order of the buttons (allowed: `FALSE` and `TRUE`; default: `TRUE`).
 
 Environment variables can be specified in a `.env` config in the format:
 
