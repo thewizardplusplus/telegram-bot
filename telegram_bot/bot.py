@@ -74,11 +74,15 @@ def _make_button_markup(
         message_id,
         action,
     ) if all((db_connection, channel_id, message_id)) else 0
-    text = _format_button_text(
-        env.get_env(action.upper() + '_TEXT', action.capitalize()),
-        counter,
-    )
+    text = _format_button_text(action, counter, counter)
     return telebot.types.InlineKeyboardButton(text, callback_data=action)
 
-def _format_button_text(text, data):
-    return '{} ({})'.format(text, data) if data is not None else text
+def _format_button_text(action, number, total_number):
+    template = env.get_env(
+        action.upper() + '_TEXT',
+        action.capitalize() + ' ${number} (${percents}%)',
+    )
+    percents = number / total_number * 100 if number != 0 else 0
+    return template \
+        .replace('${number}', str(number)) \
+        .replace('${percents}', '{:.2f}'.format(percents))
