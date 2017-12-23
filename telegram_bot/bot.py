@@ -2,10 +2,20 @@ import logging
 
 import telebot
 import termcolor
+import emoji
 
 from . import env
 from . import logger
 from . import db
+
+_DEFAULT_BUTTON_TEXT_SUFFIX = ' ${number} (${percents}%)'
+_BUTTONS_TEXTS = {
+    action: text + _DEFAULT_BUTTON_TEXT_SUFFIX
+    for action, text in {
+        'accept': ':thumbsup:',
+        'reject': ':thumbsdown:',
+    }.items()
+}
 
 def init_bot():
     telebot.logger.setLevel(logging.DEBUG)
@@ -67,10 +77,13 @@ def _make_buttons_markup(accept_number=0, reject_number=0):
     return buttons_markup
 
 def _format_button_text(action, number, total_number):
-    template = env.get_env(
+    template = emoji.emojize(env.get_env(
         action.upper() + '_TEXT',
-        action.capitalize() + ' ${number} (${percents}%)',
-    )
+        _BUTTONS_TEXTS.get(
+            action,
+            action.capitalize() + _DEFAULT_BUTTON_TEXT_SUFFIX,
+        ),
+    ), use_aliases=True)
     percents = number / total_number * 100 if number != 0 else 0
     return template \
         .replace('${number}', str(number)) \

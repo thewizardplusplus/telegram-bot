@@ -32,6 +32,7 @@ setuptools.setup(
         'python-dotenv >=0.7.1, <1.0',
         'pyTelegramBotAPI >=3.5.1, <4.0',
         'tornado >=4.5.2, <5.0',
+        'emoji >=0.4.5, <1.0',
     ],
     python_requires='>=3.5, <4.0',
     entry_points={'console_scripts': ['{} = {}:main'.format(
