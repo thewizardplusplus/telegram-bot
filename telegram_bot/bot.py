@@ -62,8 +62,7 @@ def update_buttons(bot, db_connection, channel_id, message_id):
 
 def _make_buttons_markup(accept_number=0, reject_number=0):
     total_number = accept_number + reject_number
-    buttons_markup = telebot.types.InlineKeyboardMarkup()
-    buttons_markup.row(
+    buttons = [
         telebot.types.InlineKeyboardButton(
             _format_button_text('accept', accept_number, total_number),
             callback_data='accept',
@@ -72,7 +71,12 @@ def _make_buttons_markup(accept_number=0, reject_number=0):
             _format_button_text('reject', reject_number, total_number),
             callback_data='reject',
         ),
-    )
+    ]
+    if env.get_env('SWAP_BUTTONS', 'TRUE') == 'TRUE':
+        buttons = list(reversed(buttons))
+
+    buttons_markup = telebot.types.InlineKeyboardMarkup()
+    buttons_markup.row(*buttons)
 
     return buttons_markup
 
