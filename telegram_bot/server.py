@@ -30,9 +30,9 @@ class PhotoHandler(tornado.web.RequestHandler):
 
         bot.send_photo(self._bot_client, filename)
 
-def init_server(bot_client):
+def init_server(bot_client, options):
     for name in ['tornado.access', 'tornado.application', 'tornado.general']:
-        logging.getLogger(name).setLevel(logging.DEBUG)
+        logger.init_logger(logging.getLogger(name), options)
 
     port = int(env.get_env('PORT', 4000))
     server = tornado.web.Application([

@@ -15,7 +15,7 @@ def main():
 
         bot_client = bot.init_bot()
         bot_thread.init_bot_thread(bot_client)
-        server.init_server(bot_client)
+        server.init_server(bot_client, options)
     except Exception as exception:
         logger.get_logger().error(exception)
         sys.exit(1)
