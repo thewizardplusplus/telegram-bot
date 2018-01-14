@@ -13,7 +13,7 @@ def main():
         logger.init_logger(logger.get_logger(), options)
         env.load_env()
 
-        bot_client = bot.init_bot()
+        bot_client = bot.init_bot(options)
         bot_thread.init_bot_thread(bot_client)
         server.init_server(bot_client, options)
     except Exception as exception:

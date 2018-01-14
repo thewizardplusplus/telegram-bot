@@ -1,5 +1,3 @@
-import logging
-
 import telebot
 import termcolor
 import emoji
@@ -17,8 +15,8 @@ _BUTTONS_TEXTS = {
     }.items()
 }
 
-def init_bot():
-    telebot.logger.setLevel(logging.DEBUG)
+def init_bot(options):
+    logger.init_logger(telebot.logger, options)
 
     token = env.get_env('TOKEN')
     bot = telebot.TeleBot(token, threaded=False)
