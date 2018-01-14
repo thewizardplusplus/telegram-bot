@@ -1,4 +1,5 @@
 import logging
+import os
 
 import termcolor
 
@@ -20,12 +21,22 @@ class Formatter(logging.Formatter):
 def get_logger():
     return logging.getLogger(__package__)
 
-def init_logger():
+def init_logger(filename):
     get_logger().addHandler(_make_stream_handler())
+    get_logger().addHandler(_make_file_handler(filename))
+
     get_logger().setLevel(logging.DEBUG)
 
 def _make_stream_handler():
     handler = logging.StreamHandler()
+    handler.setFormatter(_make_formatter())
+
+    return handler
+
+def _make_file_handler(filename):
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+    handler = logging.handlers.TimedRotatingFileHandler(filename, when='d')
     handler.setFormatter(_make_formatter())
 
     return handler

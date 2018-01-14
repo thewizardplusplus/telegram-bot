@@ -8,7 +8,7 @@ from . import bot_thread
 from . import server
 
 def main():
-    logger.init_logger()
+    logger.init_logger('./logs/app.log')
 
     try:
         options = cli.parse_options()
