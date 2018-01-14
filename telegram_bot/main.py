@@ -10,7 +10,7 @@ from . import server
 def main():
     try:
         options = cli.parse_options()
-        logger.init_logger(options)
+        logger.init_logger(logger.get_logger(), options)
         env.load_env()
 
         bot_client = bot.init_bot()
