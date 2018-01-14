@@ -21,11 +21,11 @@ class Formatter(logging.Formatter):
 def get_logger():
     return logging.getLogger(__package__)
 
-def init_logger(filename):
+def init_logger(options):
     get_logger().addHandler(_make_stream_handler())
-    get_logger().addHandler(_make_file_handler(filename))
+    get_logger().addHandler(_make_file_handler(options['log_file']))
 
-    get_logger().setLevel(logging.DEBUG)
+    get_logger().setLevel(options['log_level'])
 
 def _make_stream_handler():
     handler = logging.StreamHandler()
