@@ -8,10 +8,9 @@ from . import bot_thread
 from . import server
 
 def main():
-    logger.init_logger('./logs/app.log')
-
     try:
         options = cli.parse_options()
+        logger.init_logger(options['log_file'])
         env.load_env()
 
         bot_client = bot.init_bot()

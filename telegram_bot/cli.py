@@ -21,5 +21,12 @@ def parse_options():
         version='Telegram Bot, v{}\n'.format(consts.APP_VERSION) \
             + 'Copyright (C) 2017 thewizardplusplus',
     )
+    parser.add_argument(
+        '-f',
+        '--log-file',
+        metavar='PATH',
+        default='./logs/app.log',
+        help='base filename for rotated log files',
+    )
 
     return vars(parser.parse_args())
