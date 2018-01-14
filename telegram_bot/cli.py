@@ -1,4 +1,5 @@
 import argparse
+import logging
 
 from . import consts
 
@@ -28,5 +29,20 @@ def parse_options():
         default='./logs/app.log',
         help='base filename for rotated log files',
     )
+    parser.add_argument(
+        '-l',
+        '--log-level',
+        type=_parse_log_level,
+        metavar='NAME',
+        default='info',
+        help='minimal allowed log level',
+    )
 
     return vars(parser.parse_args())
+
+def _parse_log_level(level):
+    numeric_level = getattr(logging, level.upper(), None)
+    if not isinstance(numeric_level, int):
+        raise argparse.ArgumentTypeError('invalid log level: ' + level)
+
+    return numeric_level
