@@ -22,10 +22,13 @@ def get_logger():
 
 def init_logger():
     handler = logging.StreamHandler()
-    handler.setFormatter(Formatter(
-        fmt=termcolor.colored('%(asctime)s', 'grey') \
-            + ' [%(levelname)s] %(message)s',
-    ))
+    handler.setFormatter(_make_formatter())
 
     get_logger().addHandler(handler)
     get_logger().setLevel(logging.DEBUG)
+
+def _make_formatter():
+    return Formatter(
+        fmt=termcolor.colored('%(asctime)s', 'grey') \
+            + ' [%(levelname)s] %(message)s',
+    )
