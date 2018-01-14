@@ -21,11 +21,14 @@ def get_logger():
     return logging.getLogger(__package__)
 
 def init_logger():
+    get_logger().addHandler(_make_stream_handler())
+    get_logger().setLevel(logging.DEBUG)
+
+def _make_stream_handler():
     handler = logging.StreamHandler()
     handler.setFormatter(_make_formatter())
 
-    get_logger().addHandler(handler)
-    get_logger().setLevel(logging.DEBUG)
+    return handler
 
 def _make_formatter():
     return Formatter(
