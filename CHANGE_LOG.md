@@ -1,5 +1,25 @@
 # Change Log
 
+## [v1.4](https://github.com/thewizardplusplus/telegram-bot/tree/v1.4) (2018-01-15)
+
+- custom logger:
+  - log message format:
+    - add a name of a logger to its messages;
+    - automatically add a color into log messages:
+      - for a JSON data;
+      - for an URL;
+      - for a path;
+  - support a filtering of log messages by a specification of a minimal allowed log level;
+  - logging to a file:
+    - add a saving of log messages to a specified file;
+    - support an automatic daily rotation of log files;
+- use settings of the custom logger:
+  - for the web server logger;
+  - for the Telegram Bot API client logger;
+- errors handling:
+  - extend a logging of errors in the message button handler to all errors types;
+  - add a logging of all errors types in the bot polling loop.
+
 ## [v1.3](https://github.com/thewizardplusplus/telegram-bot/tree/v1.3) (2017-12-23)
 
 - support placeholders in a buttons text:
