@@ -44,6 +44,8 @@ def _make_file_handler(filename):
 
 def _make_formatter():
     return Formatter(
-        fmt=termcolor.colored('%(asctime)s', 'grey') \
-            + ' [%(levelname)s] %(message)s',
+        fmt='{} [%(levelname)s] {} %(message)s'.format(
+            termcolor.colored('%(asctime)s', 'grey'),
+            termcolor.colored('(%(name)s)', 'blue'),
+        ),
     )
