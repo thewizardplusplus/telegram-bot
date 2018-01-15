@@ -1,11 +1,11 @@
 import threading
-import sqlite3
 
 import termcolor
 
 from . import bot
 from . import db
 from . import logger
+from . import utils
 
 class BotThread(threading.Thread):
     def __init__(self, bot_client):
@@ -25,23 +25,7 @@ class BotThread(threading.Thread):
             'reject',
         ])
         def _buttons_callback(call):
-            try:
-                db.add_vote(
-                    db_connection,
-                    call.message.chat.id,
-                    call.message.message_id,
-                    call.from_user.id,
-                    call.data,
-                )
-
-                bot.update_buttons(
-                    self.bot_client,
-                    db_connection,
-                    call.message.chat.id,
-                    call.message.message_id,
-                )
-            except sqlite3.Error as exception:
-                logger.get_logger().warn(exception)
+            _handle_button_click(self.bot_client, db_connection, call)
 
         self.bot_client.polling(none_stop=True)
 
@@ -49,3 +33,20 @@ def init_bot_thread(bot_client):
     thread = BotThread(bot_client)
     thread.setDaemon(True)
     thread.start()
+
+@utils.catch_exceptions
+def _handle_button_click(bot_client, db_connection, call):
+    db.add_vote(
+        db_connection,
+        call.message.chat.id,
+        call.message.message_id,
+        call.from_user.id,
+        call.data,
+    )
+
+    bot.update_buttons(
+        bot_client,
+        db_connection,
+        call.message.chat.id,
+        call.message.message_id,
+    )
