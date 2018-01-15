@@ -53,13 +53,15 @@ But then the utility should be started as `python3 -m telegram_bot`.
 ```
 $ telegram-bot -v | --version
 $ telegram-bot -h | --help
-$ telegram-bot
+$ telegram-bot [options]
 ```
 
 Options:
 
 - `-v`, `--version` &mdash; show the version message and exit;
-- `-h`, `--help` &mdash; show this help message and exit.
+- `-h`, `--help` &mdash; show this help message and exit;
+- `-f PATH`, `--log-file PATH` &mdash; base filename for rotated log files (default: `./logs/app.log`);
+- `-l NAME`, `--log-level NAME` &mdash; minimal allowed log level (default: `info`).
 
 Environment variables:
 
