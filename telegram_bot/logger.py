@@ -22,6 +22,7 @@ def get_logger():
     return logging.getLogger(__package__)
 
 def init_logger(logger, options):
+    logger.handlers = []
     logger.addHandler(_make_stream_handler())
     logger.addHandler(_make_file_handler(options['log_file']))
 
