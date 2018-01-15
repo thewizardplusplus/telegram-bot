@@ -13,6 +13,7 @@ class BotThread(threading.Thread):
 
         self.bot_client = bot_client
 
+    @utils.catch_exceptions
     def run(self):
         logger.get_logger().info(
             'run a %s bot polling',
