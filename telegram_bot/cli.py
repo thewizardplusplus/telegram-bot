@@ -20,7 +20,7 @@ def parse_options():
         action='version',
         help='show the version message and exit',
         version='Telegram Bot, v{}\n'.format(consts.APP_VERSION) \
-            + 'Copyright (C) 2017 thewizardplusplus',
+            + 'Copyright (C) 2017-2018 thewizardplusplus',
     )
     parser.add_argument(
         '-f',
