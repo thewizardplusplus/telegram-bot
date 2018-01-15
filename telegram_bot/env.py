@@ -14,7 +14,7 @@ def load_env():
     logger.get_logger().info(
         'load the %s config %s',
         termcolor.colored('.env', 'magenta'),
-        termcolor.colored(env_path, 'green'),
+        env_path,
     )
 
 def get_env(name, default=None):

@@ -26,10 +26,7 @@ def init_bot(options):
     )
 
     bot_user = bot.get_me()
-    logger.get_logger().debug(
-        'bot user: %s',
-        termcolor.colored(bot_user, 'cyan'),
-    )
+    logger.get_logger().debug('bot user: ' + str(bot_user))
 
     return bot
 

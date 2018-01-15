@@ -1,4 +1,5 @@
 import sqlite3
+import os.path
 
 import termcolor
 
@@ -10,6 +11,7 @@ def init_db():
     if len(db_filename) == 0:
         return None
 
+    db_filename = os.path.abspath(db_filename)
     db_connection = sqlite3.connect(db_filename)
     with db_connection:
         db_connection.execute('''CREATE TABLE IF NOT EXISTS votes (
@@ -21,10 +23,7 @@ def init_db():
             UNIQUE (chat_id, message_id, user_id)
         )''')
 
-    logger.get_logger().info(
-        'connect to the database ' + termcolor.colored(db_filename, 'green'),
-    )
-
+    logger.get_logger().info('connect to the database ' + db_filename)
     return db_connection
 
 def add_vote(db_connection, chat_id, message_id, user_id, action):
