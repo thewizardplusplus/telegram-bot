@@ -1,4 +1,5 @@
 import threading
+import functools
 
 import termcolor
 
@@ -10,8 +11,7 @@ from . import utils
 class BotThread(threading.Thread):
     def __init__(self, bot_client):
         super().__init__()
-
-        self.bot_client = bot_client
+        self._bot_client = bot_client
 
     @utils.catch_exceptions
     def run(self):
@@ -21,14 +21,15 @@ class BotThread(threading.Thread):
         )
 
         db_connection = db.init_db()
-        @self.bot_client.callback_query_handler(func=lambda call: call.data in [
-            'accept',
-            'reject',
-        ])
-        def _buttons_callback(call):
-            _handle_button_click(self.bot_client, db_connection, call)
+        self._bot_client.callback_query_handler(
+            func=lambda call: call.data in ['accept', 'reject'],
+        )(functools.partial(
+            _handle_button_click,
+            self._bot_client,
+            db_connection,
+        ))
 
-        self.bot_client.polling(none_stop=True)
+        self._bot_client.polling(none_stop=True)
 
 def init_bot_thread(bot_client):
     thread = BotThread(bot_client)
