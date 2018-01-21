@@ -1,5 +1,11 @@
 # Change Log
 
+## [v1.5](https://github.com/thewizardplusplus/telegram-bot/tree/v1.5) (2018-01-21)
+
+- errors handling:
+  - restart a bot polling on errors;
+  - support a specified delay before a bot polling restart.
+
 ## [v1.4](https://github.com/thewizardplusplus/telegram-bot/tree/v1.4) (2018-01-15)
 
 - custom logger:
