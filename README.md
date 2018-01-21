@@ -72,7 +72,8 @@ Environment variables:
 - `TELEGRAM_BOT_REJECT_TEXT` &mdash; text of the reject button (default: `:thumbsdown: #{number} (#{percents}%)`);
 - `TELEGRAM_BOT_DATABASE` &mdash; path to the [SQLite](https://www.sqlite.org/) database file (default: `./votes.db`);
 - `TELEGRAM_BOT_CHANGEABLE_VOTE` &mdash; flag denoting changeability of a vote (allowed: `FALSE` and `TRUE`; default: `TRUE`);
-- `TELEGRAM_BOT_SWAP_BUTTONS` &mdash; flag denoting inversion of the order of the buttons (allowed: `FALSE` and `TRUE`; default: `TRUE`).
+- `TELEGRAM_BOT_SWAP_BUTTONS` &mdash; flag denoting inversion of the order of the buttons (allowed: `FALSE` and `TRUE`; default: `TRUE`);
+- `TELEGRAM_BOT_RESTART_DELAY` &mdash; delay before a bot polling restart (in milliseconds; default: `1000`).
 
 Environment variables can be specified in a `.env` config in the format:
 
