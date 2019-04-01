@@ -4,4 +4,6 @@ COPY . /usr/src/telegram-bot
 
 WORKDIR /usr/src/telegram-bot
 
+RUN pip install --no-cache-dir .
+
 CMD ["python", "-m", "telegram_bot"]
