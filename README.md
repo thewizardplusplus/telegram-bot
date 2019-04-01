@@ -114,4 +114,4 @@ Options:
 
 GPL-3.0-or-later
 
-Copyright &copy; 2017-2018 thewizardplusplus
+Copyright &copy; 2017-2019 thewizardplusplus
