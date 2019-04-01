@@ -3,6 +3,7 @@ services:
   telegram-bot:
     build: .
     image: telegram-bot:1.6
+    env_file: .env
     ports:
       - 4000:4000
 
