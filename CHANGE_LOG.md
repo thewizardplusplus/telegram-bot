@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.6](https://github.com/thewizardplusplus/telegram-bot/tree/v1.6) (2019-04-01)
+
+- add [Docker](https://www.docker.com/) configurations:
+  - `Dockerfile`:
+    - add a base configuration;
+    - install app dependencies;
+  - `docker-compose.yml`:
+    - add a base configuration;
+    - add a [Swagger](https://swagger.io/) configuration;
+    - use a `.env` file outside an image.
+
 ## [v1.5](https://github.com/thewizardplusplus/telegram-bot/tree/v1.5) (2018-01-21)
 
 - errors handling:
