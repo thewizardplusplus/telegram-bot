@@ -7,7 +7,7 @@
 - publication into a specified channel:
   - sending of text messages;
   - sending of photo messages;
-- voting for messages:
+- voting for messages (optional):
   - restrictions (via a remembering in an SQLite database):
     - one vote per one user;
     - possibility change an own vote (optionally, i.e. may be disabled);
@@ -68,6 +68,7 @@ Environment variables:
 - `TELEGRAM_BOT_TOKEN` &mdash; [Telegram](https://telegram.org/) API access token;
 - `TELEGRAM_BOT_CHANNEL` &mdash; [Telegram](https://telegram.org/) channel name;
 - `TELEGRAM_BOT_PORT` &mdash; bot API port (default: `4000`);
+- `TELEGRAM_BOT_VOTING` &mdash; flag denoting allowing of voting (allowed: `FALSE` and `TRUE`; default: `TRUE`);
 - `TELEGRAM_BOT_ACCEPT_TEXT` &mdash; text of the accept button (default: `:thumbsup: #{number} (#{percents}%)`);
 - `TELEGRAM_BOT_REJECT_TEXT` &mdash; text of the reject button (default: `:thumbsdown: #{number} (#{percents}%)`);
 - `TELEGRAM_BOT_DATABASE` &mdash; path to the [SQLite](https://www.sqlite.org/) database file (default: `./votes.db`);
