@@ -56,6 +56,9 @@ def update_buttons(bot, db_connection, channel_id, message_id):
     )
 
 def _make_buttons_markup(accept_number=0, reject_number=0):
+    if env.get_env('VOTING', 'TRUE') != 'TRUE':
+        return None
+
     total_number = accept_number + reject_number
     buttons = [
         telebot.types.InlineKeyboardButton(
