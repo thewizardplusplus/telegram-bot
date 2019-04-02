@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.7](https://github.com/thewizardplusplus/telegram-bot/tree/v1.7) (2019-04-02)
+
+- make voting for messages optional.
+
 ## [v1.6](https://github.com/thewizardplusplus/telegram-bot/tree/v1.6) (2019-04-01)
 
 - add [Docker](https://www.docker.com/) configurations:
