@@ -37,11 +37,12 @@ def send_message(bot, text):
         reply_markup=_make_buttons_markup(),
     )
 
-def send_photo(bot, filename):
+def send_photo(bot, filename, text=None):
     with open(filename, 'rb') as photo:
         bot.send_photo(
             env.get_env('CHANNEL'),
             photo,
+            caption=text,
             reply_markup=_make_buttons_markup(),
         )
 
