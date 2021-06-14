@@ -28,7 +28,11 @@ class PhotoHandler(tornado.web.RequestHandler):
         if len(filename) == 0:
             raise tornado.web.HTTPError(400, "Argument file can't be empty")
 
-        bot.send_photo(self._bot_client, filename)
+        text = self.get_body_argument('text', None)
+        if text is not None:
+            text = text.strip()
+
+        bot.send_photo(self._bot_client, filename, text)
 
 def init_server(bot_client, options):
     for name in ['tornado.access', 'tornado.application', 'tornado.general']:
