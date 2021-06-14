@@ -34,6 +34,7 @@ def send_message(bot, text):
     bot.send_message(
         env.get_env('CHANNEL'),
         text,
+        parse_mode='MarkdownV2',
         reply_markup=_make_buttons_markup(),
     )
 
@@ -43,6 +44,7 @@ def send_photo(bot, filename, text=None):
             env.get_env('CHANNEL'),
             photo,
             caption=text,
+            parse_mode='MarkdownV2',
             reply_markup=_make_buttons_markup(),
         )
 
