@@ -30,21 +30,21 @@ def init_bot(options):
 
     return bot
 
-def send_message(bot, text):
+def send_message(bot, text, format=None):
     bot.send_message(
         env.get_env('CHANNEL'),
         text,
-        parse_mode='MarkdownV2',
+        parse_mode=format,
         reply_markup=_make_buttons_markup(),
     )
 
-def send_photo(bot, filename, text=None):
+def send_photo(bot, filename, text=None, format=None):
     with open(filename, 'rb') as photo:
         bot.send_photo(
             env.get_env('CHANNEL'),
             photo,
             caption=text,
-            parse_mode='MarkdownV2',
+            parse_mode=format,
             reply_markup=_make_buttons_markup(),
         )
 

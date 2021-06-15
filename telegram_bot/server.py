@@ -8,6 +8,8 @@ from . import env
 from . import logger
 from . import bot
 
+_ALLOWED_FORMATS = ['Markdown', 'MarkdownV2', 'HTML']
+
 class MessageHandler(tornado.web.RequestHandler):
     def initialize(self, bot_client):
         self._bot_client = bot_client
@@ -17,7 +19,15 @@ class MessageHandler(tornado.web.RequestHandler):
         if len(text) == 0:
             raise tornado.web.HTTPError(400, "Argument text can't be empty")
 
-        bot.send_message(self._bot_client, text)
+        format = self.get_body_argument('format', None)
+        if format is not None:
+            format = format.strip()
+            if format not in _ALLOWED_FORMATS:
+                message = "Argument format is incorrect; " \
+                    + f"allowed formats: {_ALLOWED_FORMATS}."
+                raise tornado.web.HTTPError(400, message)
+
+        bot.send_message(self._bot_client, text, format)
 
 class PhotoHandler(tornado.web.RequestHandler):
     def initialize(self, bot_client):
@@ -32,7 +42,15 @@ class PhotoHandler(tornado.web.RequestHandler):
         if text is not None:
             text = text.strip()
 
-        bot.send_photo(self._bot_client, filename, text)
+        format = self.get_body_argument('format', None)
+        if format is not None:
+            format = format.strip()
+            if format not in _ALLOWED_FORMATS:
+                message = "Argument format is incorrect; " \
+                    + f"allowed formats: {_ALLOWED_FORMATS}."
+                raise tornado.web.HTTPError(400, message)
+
+        bot.send_photo(self._bot_client, filename, text, format)
 
 def init_server(bot_client, options):
     for name in ['tornado.access', 'tornado.application', 'tornado.general']:
