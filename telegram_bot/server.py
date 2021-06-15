@@ -8,48 +8,47 @@ from . import env
 from . import logger
 from . import bot
 
+_REQUIRED_ARGUMENT = tornado.web.RequestHandler._ARG_DEFAULT
 _ALLOWED_FORMATS = ['Markdown', 'MarkdownV2', 'HTML']
 
-class MessageHandler(tornado.web.RequestHandler):
+class RequestHandler(tornado.web.RequestHandler):
+    def _get_custom_argument(
+        self,
+        name,
+        defaultValue=_REQUIRED_ARGUMENT,
+        allowedValues=None,
+    ):
+        value = self.get_body_argument(name, defaultValue)
+        if value is None:
+            return None
+
+        value = value.strip()
+        if defaultValue == _REQUIRED_ARGUMENT and value == '':
+            raise tornado.web.HTTPError(400, f'Argument {name} cannot be empty')
+        if allowedValues is not None and value not in allowedValues:
+            message = \
+                f'Argument {name} is incorrect; allowed values: {allowedValues}'
+            raise tornado.web.HTTPError(400, message)
+
+        return value
+
+class MessageHandler(RequestHandler):
     def initialize(self, bot_client):
         self._bot_client = bot_client
 
     def post(self):
-        text = self.get_body_argument('text').strip()
-        if len(text) == 0:
-            raise tornado.web.HTTPError(400, "Argument text can't be empty")
-
-        format = self.get_body_argument('format', None)
-        if format is not None:
-            format = format.strip()
-            if format not in _ALLOWED_FORMATS:
-                message = "Argument format is incorrect; " \
-                    + f"allowed formats: {_ALLOWED_FORMATS}."
-                raise tornado.web.HTTPError(400, message)
-
+        text = self._get_custom_argument('text')
+        format = self._get_custom_argument('format', None, _ALLOWED_FORMATS)
         bot.send_message(self._bot_client, text, format)
 
-class PhotoHandler(tornado.web.RequestHandler):
+class PhotoHandler(RequestHandler):
     def initialize(self, bot_client):
         self._bot_client = bot_client
 
     def post(self):
-        filename = self.get_body_argument('file').strip()
-        if len(filename) == 0:
-            raise tornado.web.HTTPError(400, "Argument file can't be empty")
-
-        text = self.get_body_argument('text', None)
-        if text is not None:
-            text = text.strip()
-
-        format = self.get_body_argument('format', None)
-        if format is not None:
-            format = format.strip()
-            if format not in _ALLOWED_FORMATS:
-                message = "Argument format is incorrect; " \
-                    + f"allowed formats: {_ALLOWED_FORMATS}."
-                raise tornado.web.HTTPError(400, message)
-
+        filename = self._get_custom_argument('file')
+        text = self._get_custom_argument('text', None)
+        format = self._get_custom_argument('format', None, _ALLOWED_FORMATS)
         bot.send_photo(self._bot_client, filename, text, format)
 
 def init_server(bot_client, options):
