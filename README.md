@@ -106,7 +106,9 @@ Options:
 
 ## Documentation
 
-- API description in the [Swagger](http://swagger.io/) format: [docs/swagger.yaml](docs/swagger.yaml);
+- API description:
+  - in the [Swagger](http://swagger.io/) format: [docs/swagger.yaml](docs/swagger.yaml);
+  - in the format of a [Postman](https://www.postman.com/) collection: [docs/postman_collection.json](docs/postman_collection.json);
 - UML component diagram:
   - in the [PlantUML](https://plantuml.com/) language: [docs/architecture.plantuml](docs/architecture.plantuml);
   - render: [docs/architecture.svg](docs/architecture.svg).
