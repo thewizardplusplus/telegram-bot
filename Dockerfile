@@ -1,9 +1,7 @@
-FROM python:3.7.3-alpine3.9
-
-COPY . /usr/src/telegram-bot
+FROM python:3.9.5-alpine3.13
 
 WORKDIR /usr/src/telegram-bot
-
+COPY . .
 RUN pip install --no-cache-dir .
 
 CMD ["python", "-m", "telegram_bot"]
