@@ -11,13 +11,19 @@ function send() {
 	declare -r host="$1"
 	declare -r port="$2"
 	declare -r endpoint="$3"
-	declare -r data="$4"
+
+	declare -a data=()
+	shift 3; for argument in "$@"; do
+		if [[ !("$argument" =~ =$) ]]; then
+			data+=(--data-urlencode "$argument")
+		fi
+	done
 
 	curl \
 		--silent \
 		--fail \
 		--header "Content-Type: application/x-www-form-urlencoded" \
-		--data-urlencode "$data" \
+		"${data[@]}" \
 		"$host:$port/api/v1/$endpoint"
 	if [[ $? != 0 ]]; then
 		error "request failed"
