@@ -5,8 +5,19 @@
 ## Features
 
 - publication into a specified channel:
-  - sending of text messages;
-  - sending of photo messages;
+  - sending of text messages:
+    - support the markup specifying:
+      - allowed markups:
+        - `Markdown`;
+        - `MarkdownV2`;
+        - `HTML`;
+  - sending of photo messages:
+    - support a photo caption:
+      - support the markup specifying:
+        - allowed markups:
+          - `Markdown`;
+          - `MarkdownV2`;
+          - `HTML`;
 - voting for messages (optional):
   - restrictions (via a remembering in an SQLite database):
     - one vote per one user;
@@ -92,8 +103,8 @@ A `.env` config will never modify any environment variables that have already be
 
 ```
 $ ./tools/sender.bash -h
-$ ./tools/sender.bash [-H HOST] [-P PORT] -t TEXT
-$ ./tools/sender.bash [-H HOST] [-P PORT] -f PATH
+$ ./tools/sender.bash [-H HOST] [-P PORT] [-m MARKUP] -t TEXT
+$ ./tools/sender.bash [-H HOST] [-P PORT] [-t TEXT] [-m MARKUP] -f PATH
 ```
 
 Options:
@@ -102,6 +113,7 @@ Options:
 - `-H HOST` &mdash; set a host name (default: `localhost`);
 - `-P PORT` &mdash; set a port number (default: `4000`);
 - `-t TEXT` &mdash; set a message text;
+- `-m MARKUP` &mdash; set a message text markup (allowed: `Markdown`, `MarkdownV2`, and `HTML`);
 - `-f PATH` &mdash; set a path to a message photo.
 
 ## Documentation
