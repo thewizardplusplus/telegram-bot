@@ -117,4 +117,4 @@ Options:
 
 GPL-3.0-or-later
 
-Copyright &copy; 2017-2019 thewizardplusplus
+Copyright &copy; 2017-2019, 2021 thewizardplusplus
