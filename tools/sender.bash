@@ -33,28 +33,32 @@ function send() {
 declare host="localhost"
 declare -i port=4000
 declare text=""
+declare markup=""
 declare file=""
-while getopts "hH:P:t:f:" option; do
+while getopts "hH:P:t:m:f:" option; do
 	case "$option" in
 		h)
 			declare -r script_name="$(basename "$0")"
 			echo "Usage:"
 			echo "  $script_name -h"
-			echo "  $script_name [-H HOST] [-P PORT] -t TEXT"
-			echo "  $script_name [-H HOST] [-P PORT] [-t TEXT] -f PATH"
+			echo "  $script_name [-H HOST] [-P PORT] [-m MARKUP] -t TEXT"
+			echo "  $script_name [-H HOST] [-P PORT] [-t TEXT] [-m MARKUP] -f PATH"
 			echo
 			echo "Options:"
-			echo "  -h       - show this help message;"
-			echo "  -H HOST  - set a host name (default: localhost);"
-			echo "  -P PORT  - set a port number (default: 4000);"
-			echo "  -t TEXT  - set a message text;"
-			echo "  -f PATH  - set a path to a message photo."
+			echo "  -h         - show this help message;"
+			echo "  -H HOST    - set a host name (default: localhost);"
+			echo "  -P PORT    - set a port number (default: 4000);"
+			echo "  -t TEXT    - set a message text;"
+			echo "  -m MARKUP  - set a message text markup" \
+				"(allowed values: Markdown, MarkdownV2, or HTML);"
+			echo "  -f PATH    - set a path to a message photo."
 
 			exit 0
 			;;
 		H) host="$OPTARG";;
 		P) port="$OPTARG";;
 		t) text="$OPTARG";;
+		m) markup="$OPTARG";;
 		f) file="$OPTARG";;
 		?) exit 1;;
 	esac
@@ -62,11 +66,20 @@ done
 if (( port < 1 || port > 65535 )); then
 	error "port is incorrect"
 fi
+if [[
+	"$markup" != ""
+	&& "$markup" != "Markdown"
+	&& "$markup" != "MarkdownV2"
+	&& "$markup" != "HTML"
+]]; then
+	error "markup is incorrect"
+fi
 
 if [[ "$file" != "" ]]; then
-	send "$host" "$port" photo "file=$(realpath "$file")" "text=$text"
+	send "$host" "$port" photo \
+		"file=$(realpath "$file")" "text=$text" "format=$markup"
 	exit 0
 fi
 if [[ "$text" != "" ]]; then
-	send "$host" "$port" message "text=$text"
+	send "$host" "$port" message "text=$text" "format=$markup"
 fi
