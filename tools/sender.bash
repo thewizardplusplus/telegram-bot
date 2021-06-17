@@ -41,7 +41,7 @@ while getopts "hH:P:t:f:" option; do
 			echo "Usage:"
 			echo "  $script_name -h"
 			echo "  $script_name [-H HOST] [-P PORT] -t TEXT"
-			echo "  $script_name [-H HOST] [-P PORT] -f PATH"
+			echo "  $script_name [-H HOST] [-P PORT] [-t TEXT] -f PATH"
 			echo
 			echo "Options:"
 			echo "  -h       - show this help message;"
@@ -63,9 +63,10 @@ if (( port < 1 || port > 65535 )); then
 	error "port is incorrect"
 fi
 
+if [[ "$file" != "" ]]; then
+	send "$host" "$port" photo "file=$(realpath "$file")" "text=$text"
+	exit 0
+fi
 if [[ "$text" != "" ]]; then
 	send "$host" "$port" message "text=$text"
-fi
-if [[ "$file" != "" ]]; then
-	send "$host" "$port" photo "file=$(realpath "$file")"
 fi
