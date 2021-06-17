@@ -25,8 +25,10 @@
                 "type": "object",
                 "properties": {
                   "text": {
-                    "type": "string",
-                    "pattern": "\\S+"
+                    "$ref": "#/components/schemas/nonemptyString"
+                  },
+                  "format": {
+                    "$ref": "#/components/schemas/formatEnum"
                   }
                 },
                 "required": ["text"]
@@ -57,8 +59,13 @@
                 "type": "object",
                 "properties": {
                   "file": {
-                    "type": "string",
-                    "pattern": "\\S+"
+                    "$ref": "#/components/schemas/nonemptyString"
+                  },
+                  "text": {
+                    "type": "string"
+                  },
+                  "format": {
+                    "$ref": "#/components/schemas/formatEnum"
                   }
                 },
                 "required": ["file"]
@@ -77,6 +84,18 @@
             "description": "Internal Server Error"
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "nonemptyString": {
+        "type": "string",
+        "pattern": "^(?!\\s*$)[\\s\\S]+"
+      },
+      "formatEnum": {
+        "type": "string",
+        "enum": ["Markdown", "MarkdownV2", "HTML"]
       }
     }
   }
