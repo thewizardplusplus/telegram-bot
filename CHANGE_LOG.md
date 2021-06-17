@@ -1,5 +1,26 @@
 # Change Log
 
+## [v1.8](https://github.com/thewizardplusplus/telegram-bot/tree/v1.8) (2021-06-17)
+
+- publication into a specified channel:
+  - sending of text messages:
+    - support the markup specifying:
+      - allowed markups:
+        - `Markdown`;
+        - `MarkdownV2`;
+        - `HTML`;
+  - sending of photo messages:
+    - support a photo caption:
+      - support the markup specifying:
+        - allowed markups:
+          - `Markdown`;
+          - `MarkdownV2`;
+          - `HTML`;
+- perform the refactoring:
+  - add the `server.RequestHandler` class;
+- add the documentation:
+  - add the [Postman](https://www.postman.com/) collection.
+
 ## [v1.7](https://github.com/thewizardplusplus/telegram-bot/tree/v1.7) (2019-04-02)
 
 - make voting for messages optional.
