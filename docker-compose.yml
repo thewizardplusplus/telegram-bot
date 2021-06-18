@@ -2,7 +2,7 @@ version: "3"
 services:
   telegram-bot:
     build: .
-    image: telegram-bot:1.8
+    image: telegram-bot:1.9
     env_file: .env
     ports:
       - 4000:4000
