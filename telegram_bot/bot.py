@@ -33,7 +33,7 @@ def init_bot(options):
 def send_message(bot, text, format=None):
     bot.send_message(
         env.get_env('CHANNEL'),
-        text,
+        emoji.emojize(text, use_aliases=True),
         parse_mode=format,
         reply_markup=_make_buttons_markup(),
     )
@@ -43,7 +43,8 @@ def send_photo(bot, filename, text=None, format=None):
         bot.send_photo(
             env.get_env('CHANNEL'),
             photo,
-            caption=text,
+            caption=emoji.emojize(text, use_aliases=True) \
+                if text is not None else None,
             parse_mode=format,
             reply_markup=_make_buttons_markup(),
         )
