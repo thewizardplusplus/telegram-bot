@@ -1,5 +1,18 @@
 # Change Log
 
+## [v1.9](https://github.com/thewizardplusplus/telegram-bot/tree/v1.9) (2021-06-18)
+
+- publication into a specified channel:
+  - sending of text messages:
+    - support emojis (with aliases);
+  - sending of photo messages:
+    - support a photo caption:
+      - support emojis (with aliases);
+- voting for messages (optional):
+  - decor:
+    - displaying of a voting result on buttons instead placeholders:
+      - total number of votes.
+
 ## [v1.8](https://github.com/thewizardplusplus/telegram-bot/tree/v1.8) (2021-06-17)
 
 - publication into a specified channel:
