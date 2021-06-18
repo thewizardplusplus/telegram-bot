@@ -11,6 +11,7 @@
         - `Markdown`;
         - `MarkdownV2`;
         - `HTML`;
+    - support emojis (with aliases);
   - sending of photo messages:
     - support a photo caption:
       - support the markup specifying:
@@ -18,6 +19,7 @@
           - `Markdown`;
           - `MarkdownV2`;
           - `HTML`;
+      - support emojis (with aliases);
 - voting for messages (optional):
   - restrictions (via a remembering in an SQLite database):
     - one vote per one user;
@@ -28,6 +30,7 @@
     - customizable a buttons text via individual templates;
     - displaying of a voting result on buttons instead placeholders:
       - number of votes;
+      - total number of votes;
       - percent of votes;
     - support emojis (with aliases) in a buttons text;
 - working mode:
@@ -80,8 +83,8 @@ Environment variables:
 - `TELEGRAM_BOT_CHANNEL` &mdash; [Telegram](https://telegram.org/) channel name;
 - `TELEGRAM_BOT_PORT` &mdash; bot API port (default: `4000`);
 - `TELEGRAM_BOT_VOTING` &mdash; flag denoting allowing of voting (allowed: `FALSE` and `TRUE`; default: `TRUE`);
-- `TELEGRAM_BOT_ACCEPT_TEXT` &mdash; text of the accept button (default: `:thumbsup: #{number} (#{percents}%)`);
-- `TELEGRAM_BOT_REJECT_TEXT` &mdash; text of the reject button (default: `:thumbsdown: #{number} (#{percents}%)`);
+- `TELEGRAM_BOT_ACCEPT_TEXT` &mdash; text of the accept button (default: `:thumbsup: #{number}/#{total_number} (#{percents}%)`);
+- `TELEGRAM_BOT_REJECT_TEXT` &mdash; text of the reject button (default: `:thumbsdown: #{number}/#{total_number} (#{percents}%)`);
 - `TELEGRAM_BOT_DATABASE` &mdash; path to the [SQLite](https://www.sqlite.org/) database file (default: `./votes.db`);
 - `TELEGRAM_BOT_CHANGEABLE_VOTE` &mdash; flag denoting changeability of a vote (allowed: `FALSE` and `TRUE`; default: `TRUE`);
 - `TELEGRAM_BOT_SWAP_BUTTONS` &mdash; flag denoting inversion of the order of the buttons (allowed: `FALSE` and `TRUE`; default: `TRUE`);
