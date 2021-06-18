@@ -6,7 +6,7 @@ from . import env
 from . import logger
 from . import db
 
-_DEFAULT_BUTTON_TEXT_SUFFIX = ' #{number} (#{percents}%)'
+_DEFAULT_BUTTON_TEXT_SUFFIX = ' #{number}/#{total_number} (#{percents}%)'
 _BUTTONS_TEXTS = {
     action: text + _DEFAULT_BUTTON_TEXT_SUFFIX
     for action, text in {
@@ -92,4 +92,5 @@ def _format_button_text(action, number, total_number):
     percents = number / total_number * 100 if number != 0 else 0
     return template \
         .replace('#{number}', str(number)) \
+        .replace('#{total_number}', str(total_number)) \
         .replace('#{percents}', '{:.2f}'.format(percents))
