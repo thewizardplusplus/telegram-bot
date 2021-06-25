@@ -68,7 +68,10 @@ class PhotosHandler(RequestHandler):
 
         text = self._get_custom_argument('text', None)
         format = self._get_custom_argument('format', None, _ALLOWED_FORMATS)
-        bot.send_photos(self._bot_client, filenames, text, format)
+        if len(filenames) > 1:
+            bot.send_photos(self._bot_client, filenames, text, format)
+        else:
+            bot.send_photo(self._bot_client, filenames[0], text, format)
 
 def init_server(bot_client, options):
     for name in ['tornado.access', 'tornado.application', 'tornado.general']:
