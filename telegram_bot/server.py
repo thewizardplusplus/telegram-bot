@@ -10,6 +10,7 @@ from . import bot
 
 _REQUIRED_ARGUMENT = tornado.web.RequestHandler._ARG_DEFAULT
 _ALLOWED_FORMATS = ['Markdown', 'MarkdownV2', 'HTML']
+_PHOTO_COUNT_LIMIT = 10
 
 class RequestHandler(tornado.web.RequestHandler):
     def _get_custom_argument(
@@ -49,6 +50,19 @@ class PhotoHandler(RequestHandler):
         format = self._get_custom_argument('format', None, _ALLOWED_FORMATS)
         bot.send_photo(self._bot_client, filename, text, format)
 
+class PhotosHandler(RequestHandler):
+    def initialize(self, bot_client):
+        self._bot_client = bot_client
+
+    def post(self):
+        filenames = self.get_body_arguments('files')
+        if len(filenames) > _PHOTO_COUNT_LIMIT:
+            message = 'Argument files contains too many items; ' \
+                + f'{_PHOTO_COUNT_LIMIT} is the maximum'
+            raise tornado.web.HTTPError(400, message)
+
+        bot.send_photos(self._bot_client, filenames)
+
 def init_server(bot_client, options):
     for name in ['tornado.access', 'tornado.application', 'tornado.general']:
         logger.init_logger(logging.getLogger(name), options)
@@ -57,6 +71,7 @@ def init_server(bot_client, options):
     server = tornado.web.Application([
         ('/api/v1/message', MessageHandler, {'bot_client': bot_client}),
         ('/api/v1/photo', PhotoHandler, {'bot_client': bot_client}),
+        ('/api/v1/photos', PhotosHandler, {'bot_client': bot_client}),
     ])
     server.listen(port)
 
