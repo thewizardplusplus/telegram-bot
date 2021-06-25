@@ -61,6 +61,8 @@ class PhotosHandler(RequestHandler):
             self.get_body_arguments('files'),
             key=os.path.realpath,
         ))
+        if len(filenames) == 0:
+            raise tornado.web.HTTPError(400, 'Argument files cannot be empty')
         if len(filenames) > _PHOTO_COUNT_LIMIT:
             message = 'Argument files contains too many items; ' \
                 + f'{_PHOTO_COUNT_LIMIT} is the maximum'
