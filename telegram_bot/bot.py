@@ -1,3 +1,5 @@
+import contextlib
+
 import telebot
 import termcolor
 import emoji
@@ -48,6 +50,14 @@ def send_photo(bot, filename, text=None, format=None):
             parse_mode=format,
             reply_markup=_make_buttons_markup(),
         )
+
+def send_photos(bot, filenames):
+    with contextlib.ExitStack() as stack:
+        bot.send_media_group(env.get_env('CHANNEL'), (
+            telebot.types.InputMediaPhoto(photo)
+            for filename in filenames
+            for photo in (stack.enter_context(open(filename, 'rb')),)
+        ))
 
 def update_buttons(bot, db_connection, channel_id, message_id):
     bot.edit_message_reply_markup(
