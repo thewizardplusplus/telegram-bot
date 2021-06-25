@@ -33,6 +33,7 @@ setuptools.setup(
         'pyTelegramBotAPI >=3.5.1, <4.0',
         'tornado >=4.5.2, <5.0',
         'emoji >=0.4.5, <1.0',
+        'more-itertools >=8.8.0, <9.0',
     ],
     python_requires='>=3.5, <4.0',
     entry_points={'console_scripts': ['{} = {}:main'.format(

@@ -1,8 +1,10 @@
 import logging
+import os.path
 
 import tornado.ioloop
 import tornado.web
 import termcolor
+import more_itertools
 
 from . import env
 from . import logger
@@ -55,7 +57,10 @@ class PhotosHandler(RequestHandler):
         self._bot_client = bot_client
 
     def post(self):
-        filenames = self.get_body_arguments('files')
+        filenames = list(more_itertools.unique_everseen(
+            self.get_body_arguments('files'),
+            key=os.path.realpath,
+        ))
         if len(filenames) > _PHOTO_COUNT_LIMIT:
             message = 'Argument files contains too many items; ' \
                 + f'{_PHOTO_COUNT_LIMIT} is the maximum'

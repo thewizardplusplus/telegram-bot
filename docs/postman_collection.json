@@ -444,7 +444,12 @@
 								},
 								{
 									"key": "files",
-									"value": "./photo.jpg",
+									"value": "../telegram-bot/photo.jpg",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"value": "/home/thewizardplusplus/go/src/github.com/thewizardplusplus/telegram-bot/photo.jpg",
 									"type": "text"
 								},
 								{
