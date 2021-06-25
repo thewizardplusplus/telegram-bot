@@ -21,8 +21,6 @@ class RequestHandler(tornado.web.RequestHandler):
         value = self.get_body_argument(name, defaultValue)
         if value is None:
             return None
-
-        value = value.strip()
         if defaultValue == _REQUIRED_ARGUMENT and value == '':
             raise tornado.web.HTTPError(400, f'Argument {name} cannot be empty')
         if allowedValues is not None and value not in allowedValues:
