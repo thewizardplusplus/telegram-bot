@@ -328,6 +328,124 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "photos",
+			"item": [
+				{
+					"name": "/photos (single photo)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "files",
+									"value": "./photo.jpg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/photos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/photos (few photos)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "files",
+									"value": "./photo.jpg",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"value": "./photo2.jpg",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"value": "./photo3.jpg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/photos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/photos (same photos)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "files",
+									"value": "./photo.jpg",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"value": "./photo.jpg",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"value": "./photo.jpg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/photos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
