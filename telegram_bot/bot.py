@@ -51,11 +51,16 @@ def send_photo(bot, filename, text=None, format=None):
             reply_markup=_make_buttons_markup(),
         )
 
-def send_photos(bot, filenames):
+def send_photos(bot, filenames, text=None, format=None):
     with contextlib.ExitStack() as stack:
         bot.send_media_group(env.get_env('CHANNEL'), (
-            telebot.types.InputMediaPhoto(photo)
-            for filename in filenames
+            telebot.types.InputMediaPhoto(
+                photo,
+                caption=emoji.emojize(text, use_aliases=True) \
+                    if text is not None and index == 0 else None,
+                parse_mode=format if index == 0 else None,
+            )
+            for index, filename in enumerate(filenames)
             for photo in (stack.enter_context(open(filename, 'rb')),)
         ))
 

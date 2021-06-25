@@ -344,6 +344,16 @@
 									"key": "files",
 									"value": "./photo.jpg",
 									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "normal *bold _italic bold ~italic bold strikethrough~ __underline italic bold___ bold* normal",
+									"type": "text"
+								},
+								{
+									"key": "format",
+									"value": "MarkdownV2",
+									"type": "text"
 								}
 							]
 						},
@@ -385,6 +395,16 @@
 									"key": "files",
 									"value": "./photo3.jpg",
 									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "normal *bold _italic bold ~italic bold strikethrough~ __underline italic bold___ bold* normal",
+									"type": "text"
+								},
+								{
+									"key": "format",
+									"value": "MarkdownV2",
+									"type": "text"
 								}
 							]
 						},
@@ -425,6 +445,16 @@
 								{
 									"key": "files",
 									"value": "./photo.jpg",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "normal *bold _italic bold ~italic bold strikethrough~ __underline italic bold___ bold* normal",
+									"type": "text"
+								},
+								{
+									"key": "format",
+									"value": "MarkdownV2",
 									"type": "text"
 								}
 							]

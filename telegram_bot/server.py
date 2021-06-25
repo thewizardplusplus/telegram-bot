@@ -61,7 +61,9 @@ class PhotosHandler(RequestHandler):
                 + f'{_PHOTO_COUNT_LIMIT} is the maximum'
             raise tornado.web.HTTPError(400, message)
 
-        bot.send_photos(self._bot_client, filenames)
+        text = self._get_custom_argument('text', None)
+        format = self._get_custom_argument('format', None, _ALLOWED_FORMATS)
+        bot.send_photos(self._bot_client, filenames, text, format)
 
 def init_server(bot_client, options):
     for name in ['tornado.access', 'tornado.application', 'tornado.general']:
