@@ -32,6 +32,7 @@ paths:
           description: Internal Server Error
   /photo:
     post:
+      deprecated: true
       requestBody:
         required: true
         content:

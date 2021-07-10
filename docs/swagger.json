@@ -51,6 +51,7 @@
     },
     "/photo": {
       "post": {
+        "deprecated": true,
         "requestBody": {
           "required": true,
           "content": {

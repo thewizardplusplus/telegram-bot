@@ -47,6 +47,8 @@ class PhotoHandler(RequestHandler):
         self._bot_client = bot_client
 
     def post(self):
+        logger.get_logger().warning('Endpoint /photo is deprecated')
+
         filename = self._get_custom_argument('file')
         text = self._get_custom_argument('text', None)
         format = self._get_custom_argument('format', None, _ALLOWED_FORMATS)
