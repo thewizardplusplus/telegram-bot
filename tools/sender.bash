@@ -34,7 +34,7 @@ declare host="localhost"
 declare -i port=4000
 declare text=""
 declare markup=""
-declare file=""
+declare -a files=()
 while getopts "hH:P:t:m:f:" option; do
 	case "$option" in
 		h)
@@ -42,7 +42,7 @@ while getopts "hH:P:t:m:f:" option; do
 			echo "Usage:"
 			echo "  $script_name -h"
 			echo "  $script_name [-H HOST] [-P PORT] [-m MARKUP] -t TEXT"
-			echo "  $script_name [-H HOST] [-P PORT] [-t TEXT] [-m MARKUP] -f PATH"
+			echo "  $script_name [-H HOST] [-P PORT] [-t TEXT] [-m MARKUP] -f PATH [-f PATH...]"
 			echo
 			echo "Options:"
 			echo "  -h         - show this help message;"
@@ -59,7 +59,7 @@ while getopts "hH:P:t:m:f:" option; do
 		P) port="$OPTARG";;
 		t) text="$OPTARG";;
 		m) markup="$OPTARG";;
-		f) file="$OPTARG";;
+		f) files+=("$OPTARG");;
 		?) exit 1;;
 	esac
 done
@@ -75,9 +75,9 @@ if [[
 	error "markup is incorrect"
 fi
 
-if [[ "$file" != "" ]]; then
+if (( ${#files[@]} != 0 )); then
 	send "$host" "$port" photo \
-		"file=$(realpath "$file")" "text=$text" "format=$markup"
+		"file=$(realpath "${files[0]}")" "text=$text" "format=$markup"
 	exit 0
 fi
 if [[ "$text" != "" ]]; then
