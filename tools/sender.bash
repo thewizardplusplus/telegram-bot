@@ -76,8 +76,14 @@ if [[
 fi
 
 if (( ${#files[@]} != 0 )); then
-	send "$host" "$port" photo \
-		"file=$(realpath "${files[0]}")" "text=$text" "format=$markup"
+	declare -a file_parameters=()
+	for file in "${files[@]}"; do
+		file_parameters+=("files=$(realpath "$file")")
+	done
+
+	send "$host" "$port" photos \
+		"${file_parameters[@]}" "text=$text" "format=$markup"
+
 	exit 0
 fi
 if [[ "$text" != "" ]]; then
