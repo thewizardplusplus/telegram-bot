@@ -1,5 +1,19 @@
 # Change Log
 
+## [v1.10](https://github.com/thewizardplusplus/telegram-bot/tree/v1.10) (2021-07-10)
+
+- publication into a specified channel:
+  - sending of photo albums:
+    - ignore duplicate photos:
+      - detect duplicates by their canonical paths;
+    - support a photo caption:
+      - support the markup specifying:
+        - allowed markups:
+          - `Markdown`;
+          - `MarkdownV2`;
+          - `HTML`;
+      - support emojis (with aliases).
+
 ## [v1.9](https://github.com/thewizardplusplus/telegram-bot/tree/v1.9) (2021-06-18)
 
 - publication into a specified channel:
